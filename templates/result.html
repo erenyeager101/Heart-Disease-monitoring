@@ -1,0 +1,232 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .result-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .heart-disease {
+            color: #d9534f;
+        }
+
+        .no-heart-disease {
+            color: #5cb85c;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <div class="result-container">
+        {% if prediction == 1 %}
+            <p class="heart-disease">You have heart disease.</p>
+            <div class="btn-container">
+
+
+                <a href="./templates/change_in_lifestyle.html" class="btn">Lifestyle Changes</a>
+                <a href="./templates/treatment.html" class="btn">Treatment</a>
+
+                <a href="./templates/medications.html" class="btn">Medications</a>
+
+                <a href="./templates/appointment.html" class="btn">Appointment</a>
+            </div>
+        {% elif prediction == 0 %}
+            <p class="no-heart-disease">You don't have heart disease.</p>
+            <div class="btn-container">
+                <a href="./heart_disease_info.html" class="btn">More Info</a>
+            </div>
+        {% else %}
+            <p>Sorry, there was an error in the prediction.</p>
+        {% endif %}
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .result-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .heart-disease {
+            color: #d9534f;
+        }
+
+        .no-heart-disease {
+            color: #5cb85c;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .next-steps, .support-resources {
+            margin-top: 20px;
+        }
+
+        .steps-list, .resources-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .steps-list li, .resources-list li {
+            margin: 10px 0;
+        }
+
+        .faq {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .faq h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .faq p {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <div class="result-container">
+        {% if prediction == 1 %}
+            <p class="heart-disease">You have heart disease.</p>
+            <div class="next-steps">
+                <h2>Next Steps</h2>
+                <ul class="steps-list">
+                    <li>Contact your healthcare provider immediately.</li>
+                    <li>Follow the lifestyle changes recommended by your doctor.</li>
+                    <li>Consider joining a heart disease support group.</li>
+                </ul>
+            </div>
+            <div class="support-resources">
+                <h2>Support Resources</h2>
+                <ul class="resources-list">
+                    <li><a href="https://www.heart.org/en/health-topics/heart-attack/life-after-a-heart-attack" target="_blank">Details here</a></li>
+                    <li>Call our support hotline: 1-800-123-4567</li>
+                </ul>
+            </div>
+            <div class="btn-container">
+                <a href="./templates/change_in_lifestyle.html" class="btn">Lifestyle Changes</a>
+                <a href="./templates/treatment.html" class="btn">Treatment</a>
+                <a href="./templates/medications.html" class="btn">Medications</a>
+                <a href="./templates/appointment.html" class="btn">Appointment</a>
+            </div>
+        {% elif prediction == 0 %}
+            <p class="no-heart-disease">You don't have heart disease.</p>
+            <div class="btn-container">
+                <a href="./heart_disease_info.html" class="btn">More Info</a>
+            </div>
+        {% else %}
+            <p>Sorry, there was an error in the prediction.</p>
+        {% endif %}
+    </div>
+
+    <!-- Optional FAQ Section -->
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>What should I do if I have heart disease?</strong> Follow the next steps above and consult your healthcare provider.</p>
+        <p><strong>Can heart disease be cured?</strong> While heart disease is a chronic condition, it can be managed effectively with proper treatment and lifestyle changes.</p>
+    </div>
+</body>
+</html>

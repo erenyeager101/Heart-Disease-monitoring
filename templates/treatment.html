@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Treatment </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+    body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+    body {font-size:16px;}
+    .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+    .w3-half img:hover{opacity:1}
+    </style>
+  </head>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-64"><b>Treatment<br>Options</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
+    <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">About</a> 
+    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Treatment</a> 
+    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Pacemakers</a> 
+    <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Heart Attack Symptoms</a> 
+    
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Heart Disease Treatment</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="showcase">
+    <h1 class="w3-jumbo"><b>Treament Options</b></h1>
+    <h1 class="w3-xxxlarge w3-text-red"><b></b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+  </div>
+  
+  <!-- Photo grid (modal) -->
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <img src="https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?auto=compress&cs=tinysrgb&w=600" style="width:100%" onclick="onClick(this)" alt="Heart disease prediction">
+
+    </div>
+
+    <div class="w3-half">
+      <img src="https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=600" style="width:100%" onclick="onClick(this)" alt="Treatment">
+
+    </div>
+  </div>
+
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+
+  <div class="w3-container" id="services" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>About.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Heart disease is a serious health condition that requires proper medical attention and treatment. The treatment options vary depending on the severity and type of heart disease. </p>
+  </div>
+  
+  <!-- Designers -->
+  <div class="w3-container" id="designers" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Treatment</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    
+    <p>Heart disease treatment depends on the cause and type of heart damage. Healthy lifestyle habits — such as eating a low-fat, low-salt diet, getting regular exercise and good sleep, and not smoking — are an important part of treatment.
+    </p>
+    <p><b>Some points are to be taken in consideration</b>:</p>
+  </div>
+
+  <!-- The Team -->
+  <div class="w3-row-padding w3-grayscale">
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="https://images.pexels.com/photos/7659573/pexels-photo-7659573.jpeg?auto=compress&cs=tinysrgb&w=600" alt="John" style="width:100%">
+        <div class="w3-container">
+          <h3>BP</h3>
+          <p class="w3-opacity">High blood pressure</p>
+          <p>Eating a healthier diet with less salt, exercising regularly and taking medication can help lower blood pressure.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="https://images.pexels.com/photos/128597/pexels-photo-128597.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Jane" style="width:100%">
+        <div class="w3-container">
+          <h3>chest pain</h3>
+          <p class="w3-opacity">Stents</p>
+          <p>Stents are small, expandable tubes that treat narrowed arteries in your body. In people with coronary heart disease caused by the buildup of plaque, they can: Open narrowed arteries
+            Reduce symptoms, like chest pain
+            Help treat a heart attack.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="https://media.istockphoto.com/id/494851110/photo/electrocardiograph-with-pacemaker.jpg?b=1&s=612x612&w=0&k=20&c=rgJfyZ29y9OYOHXSmJ85esEekbJX9qRFCOqLXQVYwPU=" alt="Mike" style="width:100%">
+        <div class="w3-container">
+          <h3>Pacemakers</h3>
+          <p class="w3-opacity">A pacemaker is a small device that sends electrical impulses to the heart muscle to maintain a suitable heart rate and rhythm</p>
+          <p>The heart has its own pacemaker that regulates the rate at which it beats. But some hearts don't beat regularly, a problem called arrhythmia. Often, a pacemaker device can correct it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packages / Pricing Tables -->
+  <div class="w3-container" id="packages" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-red"><b>Heart Attack Symptoms: What to Do in an Emergency.</b></h1>
+    <hr style="width:50px;border:5px solid red" class="w3-round">
+    <p>Recognizing the Symptoms. Not all heart attacks begin with the sudden, crushing chest pain that most of us have heard about. In fact, some cause no symptoms at all, especially those that happen to people with diabetes.
+
+      They may begin slowly, with mild pain and discomfort. They can happen while you're at rest or active. How severe they are can depend on your age, gender, and medical conditions.</p>
+  </div>
+
+  <div class="w3-row-padding">
+    <div class="w3-half w3-margin-bottom">
+      <ul class="w3-ul w3-light-grey w3-center">
+        <li class="w3-dark-grey w3-xlarge w3-padding-32">Warning Signs</li>
+        <li class="w3-padding-16">Chest discomfort that feels like pressure, fullness, or a squeezing pain</li>
+        <li class="w3-padding-16">Pain and discomfort that go beyond your chest</li>
+        <li class="w3-padding-16">Unexplained shortness of breath</li>
+        <li class="w3-padding-16">with or without chest discomfort</li>
+        <li class="w3-padding-16">Cold sweats
+          Nausea or vomiting</li>
+        <li class="w3-padding-16">
+          <h2>What to Do When They Happen</h2>
+          <span class="w3-opacity">If you or someone you’re with has chest discomfort or other heart attack symptoms,While your first impulse may be to drive yourself or the heart attack victim to the hospital, it’s better to get an ambulance. Emergency medical services (EMS) personnel can start treatment on the way to the hospital. They’re also trained to revive a person if their heart stops.</span>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button href="https://www.webmd.com/heart-disease/atrial-fibrillation/ss/slideshow-treating-afib?mmtrack=12968-20150-16-1-5-0-1" class="w3-button w3-white w3-padding-large w3-hover-black">Options for treating AiFb</button>
+        </li>
+      </ul>
+    </div>
+        
+    <div class="w3-half">
+      <ul class="w3-ul w3-light-grey w3-center">
+        <li class="w3-red w3-xlarge w3-padding-32">Perform CPR if You Are Qualified</li>
+        <li class="w3-padding-16">Cardiopulmonary resuscitation (CPR) is one link in what the American Heart Association calls the "chain of survival." The chain of survival is a series of actions that, when done in sequence, will give a person having a heart attack the best chance of survival.</li>
+        <li class="w3-padding-16"> chain of survival is to do CPR until there’s access to a defibrillator.</li>
+        <li class="w3-padding-16">The most common cause of death from a heart attack in adults is a disturbance in the electrical rhythm of the heart called ventricular fibrillation.</li>
+        <li class="w3-padding-16">One way of buying time until a defibrillator becomes available is to give artificial breathing and circulation with CPR.</li>
+        <li class="w3-padding-16">By giving a combination of manual chest compressions and artificial, or "mouth-to-mouth," respiration, the rescuer can breathe for the other person and help circulate some of the blood throughout their body.</li>
+        <li class="w3-padding-16">
+          <h2>CPR can be very effective.</h2>
+          <span class="w3-opacity">By doing CPR, you keep oxygenated blood flowing to the heart and brain until a defibrillator becomes available.</span>
+        </li>
+        <li class="w3-light-grey w3-padding-24">
+          <button href="https://www.webmd.com/heart-disease/postural-orthostatic-tachycardia?mmtrack=13062-20341-16-1-5-0-1" class="w3-button w3-red w3-padding-large w3-hover-black">Know more here</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+
+
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Sign up for our free Heart Health Newsletter</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>

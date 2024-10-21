@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change in Lifestyle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+        header h1 {
+            margin: 0;
+            position: relative;
+            padding-top: 100px;
+            font-size: 3em;
+            z-index: 1;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .buttons a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='videos/855944-hd_1920_1080_25fps.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+       <h1>Change in Lifestyle</h1>
+    </header>
+
+    <div class="container">
+        <p>Here are some recommendations for lifestyle changes:</p>
+        <ul>
+            <li>Eat a heart-healthy diet rich in fruits, vegetables, whole grains, and lean proteins.</li>
+            <li>Exercise regularly, aiming for at least 30 minutes of moderate-intensity exercise most days of the week.</li>
+            <li>Manage stress through relaxation techniques such as deep breathing, meditation, or yoga.</li>
+            <li>Avoid smoking and limit alcohol intake.</li>
+            <li>Get enough sleep and maintain a healthy weight.</li>
+        </ul>
+        <h2>Strategies to Prevent Heart Disease</h2>
+        <p>
+            You can help prevent heart disease by following a heart-healthy lifestyle. Here are strategies to help you protect your heart.
+        </p>
+        <p>
+            By Mayo Clinic Staff<br>
+            Heart disease is a leading cause of death. You can't change some risk factors for it, such as family history, sex at birth, or age. But you can take plenty of other steps to lower your risk of heart disease.
+        </p>
+        <h3>Get started with these eight tips to boost your heart health:</h3>
+        <ol>
+            <li>
+                <strong>Don't smoke or use tobacco</strong><br>
+                One of the best things you can do for your heart is to stop smoking or using smokeless tobacco. Even if you're not a smoker, be sure to stay away from secondhand smoke. Chemicals in tobacco can damage the heart and blood vessels. Cigarette smoke lowers the oxygen in the blood, which raises blood pressure and heart rate. That's because the heart has to work harder to supply enough oxygen to the body and brain.
+                <br><br>
+                There's good news though. The risk of heart disease starts to drop in as little as a day after quitting. After a year without cigarettes, the risk of heart disease drops to about half that of a smoker. No matter how long or how much you smoked, you'll start reaping rewards as soon as you quit.
+            </li>
+            <li>
+                <strong>Get moving: Aim for at least 30 to 60 minutes of activity daily</strong><br>
+                Regular, daily physical activity can lower the risk of heart disease. Physical activity helps control your weight. It also lowers the chances of getting other conditions that may put a strain on the heart. These include high blood pressure, high cholesterol, and type 2 diabetes.
+                <br><br>
+                If you haven't been active for a while, you may need to slowly work your way up to these goals. But in general, you should aim for at least:
+                <ul>
+                    <li>150 minutes a week of moderate aerobic exercise, such as walking at a brisk pace.</li>
+                    <li>75 minutes a week of vigorous aerobic activity, such as running.</li>
+                    <li>Two or more strength training sessions a week.</li>
+                </ul>
+                Even shorter bouts of activity offer heart benefits. So if you can't meet those guidelines, don't give up. Just five minutes of moving can help. Activities such as gardening, housekeeping, taking the stairs, and walking the dog all count toward your total. You don't have to exercise hard to benefit. But you can see bigger benefits if you boost the intensity, length, and frequency of your workouts.
+            </li>
+            <li>
+                <strong>Eat a heart-healthy diet</strong><br>
+                A healthy diet can help protect the heart, improve blood pressure and cholesterol, and lower the risk of type 2 diabetes. A heart-healthy eating plan includes:
+                <ul>
+                    <li>Vegetables and fruits.</li>
+                    <li>Beans or other legumes.</li>
+                    <li>Lean meats and fish.</li>
+                    <li>Low-fat or fat-free dairy foods.</li>
+                    <li>Whole grains.</li>
+                    <li>Healthy fats such as olive oil and avocado.</li>
+                </ul>
+                Two examples of heart-healthy food plans include the Dietary Approaches to Stop Hypertension (DASH) eating plan and the Mediterranean diet.
+                <br><br>
+                Take in less of the following:
+                <ul>
+                    <li>Salt or high-sodium meals.</li>
+                    <li>Sugar or sweetened beverages.</li>
+                    <li>Highly refined carbohydrates.</li>
+                    <li>Alcohol.</li>
+                    <li>Highly processed food, such as processed meats.</li>
+                    <li>Saturated fat, which is found in red meat, full-fat dairy products, palm oil, and coconut oil.</li>
+                    <li>Trans fat, which is found in some fried fast food, chips, and baked goods.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Maintain a healthy weight</strong><br>
+                Being overweight — especially around the middle of the body — raises the risk of heart disease. Extra weight can lead to conditions that raise the chances of getting heart disease. These conditions include high blood pressure, high cholesterol, and type 2 diabetes.
+                <br><br>
+                The body mass index (BMI) uses height and weight to find out whether a person is overweight or obese. A BMI of 25 or higher is considered overweight. In general, it's linked with higher cholesterol, higher blood pressure, and an increased risk of heart disease and stroke.
+                <br><br>
+                Waist circumference also can be a useful tool to measure how much belly fat you have. The risk of heart disease is higher if the waist measurement is greater than:
+                <ul>
+                    <li>40 inches (101.6 centimeters, or cm) for men.</li>
+                    <li>35 inches (88.9 cm) for women.</li>
+                </ul>
+                Even a small weight loss can be good for you. Reducing weight by just 3% to 5% can help lower certain fats in the blood called triglycerides. It can lower blood sugar, also called glucose. And it can cut the risk of type 2 diabetes. Losing even more helps lower blood pressure and blood cholesterol levels.
+            </li>
+            <li>
+                <strong>Get quality sleep</strong><br>
+                People who don't get enough sleep have a higher risk of obesity, high blood pressure, heart attack, diabetes, and depression.
+                <br><br>
+                Most adults need at least seven hours of sleep each night. Children usually need more. So make sure you get enough rest. Set a sleep schedule and stick to it. To do that, go to bed and wake up at the same times each day. Keep your bedroom dark and quiet too, so it's easier to sleep.
+                <br><br>
+                Talk to a member of your health care team if you feel like you get enough sleep but you're still tired throughout the day. Ask if you need to be evaluated for obstructive sleep apnea. It's a condition that can raise your risk of heart disease. Symptoms of obstructive sleep apnea include loud snoring, stopping breathing for short times during sleep, and waking up gasping for air. Treatment for obstructive sleep apnea may involve losing weight if you're overweight. It also might involve using a device that keeps your airway open while you sleep. This is called a continuous positive airway pressure (CPAP) device.
+            </li>
+        </ol>
+        <div class="buttons">
+            <a href="https://www.mayoclinic.org" target="_blank">More Info</a>
+            <a href="https://www.heart.org" target="_blank">Help</a>
+        </div>
+    </div>
+</body>
+</html>
