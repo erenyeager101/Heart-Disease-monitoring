@@ -2,7 +2,8 @@
 
 Heart disease detection using hybrid machine learning / ensemble learning involves developing models to predict the presence or risk of heart disease based on various clinical and demographic data. The goal is to improve early diagnosis and facilitate timely treatment, potentially reducing the morbidity and mortality associated with heart disease.
 
-
+# Research Done
+If you are intrested in Research Aspect of this projevct then you can read my Research at - http://dx.doi.org/10.13140/RG.2.2.15033.38247
 
 # Heart Disease Prediction
 
