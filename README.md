@@ -18,7 +18,7 @@ This project involves building and evaluating multiple base estimators as machin
 - [Models Evaluated](#models-evaluated)
 - [Results](#results)
 - [Visualization](#visualization)
-- [Saving and Loading Models](#saving-and-loading-models)
+
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -126,9 +126,6 @@ import pickle
 with open('model_randomforestversion2.pkl', 'wb') as f:
     pickle.dump(rf, f)
 
-# Load the model
-with open('model_randomforestversion2.pkl', 'rb') as f:
-    loaded_model = pickle.load(f)
     
 # Contributing
 Contributions are welcome! Please create a pull request or raise an issue to discuss your ideas.
