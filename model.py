@@ -180,6 +180,8 @@ for i in range(len(algorithms)):
     plt.ylabel("Accuracy score")
     plt.show()
 
+  # saving the predition model in pickle file format
+
     import pickle
 with open('stacking_model.pkl', 'wb') as f:
     pickle.dump(stacking_clf, f) 
