@@ -27,7 +27,7 @@ This project involves building and evaluating multiple base estimators as machin
 </p>
 
 
-## Overview
+## Video-Overview
 
 The goal of this project is to predict the presence of heart disease in a patient based on several medical features. We evaluate multiple machine learning algorithms to determine the most accurate model.
 
