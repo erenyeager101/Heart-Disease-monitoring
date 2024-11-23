@@ -8,7 +8,7 @@ If you are intrested in Research Aspect of this projevct then you can read my Re
 # Heart Disease Prediction
 
 This project involves building and evaluating multiple base estimators as machine learning models to predict the presence of heart disease based on various medical attributes. The dataset used is `heart.csv`.
-The project is fully deployed on render so anyone could access the online-heart-disease-predictor ensure the website loads properly as it takes sometime to load if detected any traffic.
+The project is fully deployed on render so anyone could access the online-heart-disease-predictor ensure the website loads properly as it takes sometime to load if detected any traffic.To visit follow the link https://heart-disease-monitoring.onrender.com/
 
 ## Table of Contents
 
