@@ -32,6 +32,7 @@ This project involves building and evaluating multiple base estimators as machin
 The goal of this project is to predict the presence of heart disease in a patient based on several medical features. We evaluate multiple machine learning algorithms to determine the most accurate model.
 
 ## Overview
+<iframe width="424" height="238" src="https://www.youtube.com/embed/3Txp134133s" title="Machine Learning based Heart Disease detection model" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 If you want to view the project deatis on youtube watch it here -> https://youtu.be/3Txp134133s
 
 ## Dataset Information
