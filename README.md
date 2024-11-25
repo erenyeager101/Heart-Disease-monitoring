@@ -1,42 +1,60 @@
-# Heart-Disease-Detection
+# ❤️ Heart Disease Detection  
+**Predict Heart Health with Hybrid Machine Learning Models**  
 
-Heart disease detection using hybrid machine learning / ensemble learning involves developing models to predict the presence or risk of heart disease based on various clinical and demographic data. The goal is to improve early diagnosis and facilitate timely treatment, potentially reducing the morbidity and mortality associated with heart disease.
+Heart disease detection using **hybrid machine learning** and **ensemble learning** models enables early diagnosis and treatment, potentially reducing mortality rates associated with cardiovascular diseases (CVD). This project demonstrates the power of data science in making healthcare more accessible and efficient. 🌍💡  
 
-# Research Done
-If you are intrested in Research Aspect of this projevct then you can read my Research at - http://dx.doi.org/10.13140/RG.2.2.15033.38247
+---
 
-# Heart Disease Prediction
+## 📝 **Research Done**  
+If you're interested in the research aspect of this project, explore my detailed paper:  
+📄 [Read the Research Paper Here](http://dx.doi.org/10.13140/RG.2.2.15033.38247)  
 
-This project involves building and evaluating multiple base estimators as machine learning models to predict the presence of heart disease based on various medical attributes. The dataset used is `heart.csv`.
-The project is fully deployed on render so anyone could access the online-heart-disease-predictor ensure the website loads properly as it takes sometime to load if detected any traffic.To visit follow the link
- https://heart-disease-monitoring.onrender.com/
+---
 
-## Table of Contents
+## 🌐 **Heart Disease Prediction**  
+This project involves building and evaluating machine learning models to predict heart disease based on the `heart.csv` dataset. The tool is deployed online, so anyone can access it for predictions!  
 
-- [Overview](#overview)
-- [Dataset Information](#dataset-information)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Models Evaluated](#models-evaluated)
-- [Results](#results)
-- [Visualization](#visualization)
+🚀 **Live Demo**: [Heart Disease Predictor](https://heart-disease-monitoring.onrender.com/)  
+*⚠ Note: The site might take a few seconds to load due to server traffic.*  
 
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-  <p align="center">
-  <img src="https://github.com/erenyeager101/ML-based-Heart-Disease-Detection/blob/main/pics/Q6_Image1_EDAI2.png" alt="Heart Disease Detection Webpage" width="600" />
-</p>
+## 📚 **Table of Contents**  
+- [Overview](#overview)  
+- [Dataset Information](#dataset-information)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Models Evaluated](#models-evaluated)  
+- [Results](#results)  
+- [Visualization](#visualization)  
+- [Contributing](#contributing)  
+- [License](#license)  
 
+---
 
-## Video-Overview
+## 🎥 **Video Overview**  
+🔗 [Watch the Project Walkthrough](https://youtu.be/3Txp134133s)  
 
-The goal of this project is to predict the presence of heart disease in a patient based on several medical features. We evaluate multiple machine learning algorithms to determine the most accurate model.
+[![Machine Learning Based Heart Disease Detection](https://img.youtube.com/vi/3Txp134133s/0.jpg)](https://www.youtube.com/watch?v=3Txp134133s)  
 
-## Overview
-[![Machine Learning based Heart Disease detection model](https://img.youtube.com/vi/3Txp134133s/0.jpg)](https://www.youtube.com/watch?v=3Txp134133s)
+---
 
-If you want to view the project deatis on youtube watch it here -> https://youtu.be/3Txp134133s
+## 🌟 **Overview**  
+The goal of this project is to predict the presence of heart disease in patients using machine learning models trained on medical attributes. By leveraging ensemble learning, we improve accuracy and reliability.  
+
+🛠 **Key Features:**  
+- Hybrid machine learning models for better accuracy.  
+- User-friendly web-based tool for remote accessibility.  
+- Rich data visualizations for insights.  
+
+---
+
+## 📊 **Dataset Information**  
+- **Dataset Used:** `heart.csv`  
+- **Attributes:**  
+  - Age, Sex, Chest Pain Type, Resting BP, Serum Cholesterol, Fasting Blood Sugar, Resting ECG, Max HR, Exercise-induced Angina, Oldpeak, Slope, Number of Vessels, and Thal.  
+- **Source:**
+
 
 ## Dataset Information
 
