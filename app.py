@@ -7,7 +7,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-with open('stacking_model.pkl', 'rb') as f:
+with open('stacking_modelfile', 'rb') as f:
     model = pickle.load(f)
 
 
