@@ -5,17 +5,15 @@ Heart disease detection using **hybrid machine learning** and **ensemble learnin
 
 ---
 
-## 📝 **Research Done**  
-If you're interested in the research aspect of this project, explore my detailed paper:  
+## 📝 **Research Paper**  
+If you're interested in the research aspect of this project, explore the detailed paper:  
 📄 [Read the Research Paper Here](http://dx.doi.org/10.13140/RG.2.2.15033.38247)  
 
 ---
 
-## 🌐 **Heart Disease Prediction**  
-This project involves building and evaluating machine learning models to predict heart disease based on the `heart.csv` dataset. The tool is deployed online, so anyone can access it for predictions!  
-
-🚀 **Live Demo**: [Heart Disease Predictor](https://heart-disease-monitoring.onrender.com/)  
-*⚠ Note: The site might take a few seconds to load due to server traffic.*  
+## 🌐 **Live Demo**  
+🚀 **Heart Disease Predictor Web App:** [Click Here](https://heart-disease-monitoring.onrender.com/)  
+*⚠ Note: The site might take a few seconds to load due to server startup time.*  
 
 ---
 
@@ -40,124 +38,149 @@ This project involves building and evaluating machine learning models to predict
 ---
 
 ## 🌟 **Overview**  
-The goal of this project is to predict the presence of heart disease in patients using machine learning models trained on medical attributes. By leveraging ensemble learning, we improve accuracy and reliability.  
+The goal of this project is to predict the presence of heart disease in patients using machine learning models trained on clinical attributes. By leveraging ensemble learning, the system improves prediction accuracy and reliability.  
 
-🛠 **Key Features:**  
-- Hybrid machine learning models for better accuracy.  
-- User-friendly web-based tool for remote accessibility.  
-- Rich data visualizations for insights.  
+### 🛠 **Key Features:**  
+- Hybrid machine learning models for improved accuracy.  
+- Flask-based user-friendly web tool for remote accessibility.  
+- Clean UI and easy-to-use prediction form.  
+- Interactive charts and visual insights.  
 
 ---
 
 ## 📊 **Dataset Information**  
 - **Dataset Used:** `heart.csv`  
-- **Attributes:**  
-  - Age, Sex, Chest Pain Type, Resting BP, Serum Cholesterol, Fasting Blood Sugar, Resting ECG, Max HR, Exercise-induced Angina, Oldpeak, Slope, Number of Vessels, and Thal.  
-- **Source:**
+- **Source:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/heart+Disease)  
 
-
-## Dataset Information
-
-The dataset contains the following columns:
-
-1. `age`: Age of the patient
-2. `sex`: 1 = male, 0 = female
-3. `cp`: Chest pain type (1: typical angina, 2: atypical angina, 3: non-anginal pain, 4: asymptomatic)
-4. `trestbps`: Resting blood pressure
-5. `chol`: Serum cholesterol in mg/dl
-6. `fbs`: Fasting blood sugar > 120 mg/dl
-7. `restecg`: Resting electrocardiographic results (0, 1, 2)
-8. `thalach`: Maximum heart rate achieved
-9. `exang`: Exercise induced angina
-10. `oldpeak`: ST depression induced by exercise relative to rest
-11. `slope`: The slope of the peak exercise ST segment
-12. `ca`: Number of major vessels (0-3) colored by fluoroscopy
-13. `thal`: 3 = normal, 6 = fixed defect, 7 = reversible defect
-14. `target`: 1 = presence of heart disease, 0 = absence of heart disease
-
-## Installation
-I have included requirements and dependencies files.
+### **Attributes:**  
+| Feature | Description |
+|----------|-------------|
+| age | Age of the patient |
+| sex | 1 = male, 0 = female |
+| cp | Chest pain type (1: typical angina, 2: atypical angina, 3: non-anginal pain, 4: asymptomatic) |
+| trestbps | Resting blood pressure (in mm Hg) |
+| chol | Serum cholesterol (mg/dl) |
+| fbs | Fasting blood sugar > 120 mg/dl (1 = true; 0 = false) |
+| restecg | Resting electrocardiographic results (0, 1, 2) |
+| thalach | Maximum heart rate achieved |
+| exang | Exercise-induced angina (1 = yes; 0 = no) |
+| oldpeak | ST depression induced by exercise relative to rest |
+| slope | The slope of the peak exercise ST segment |
+| ca | Number of major vessels (0–3) colored by fluoroscopy |
+| thal | 3 = normal; 6 = fixed defect; 7 = reversible defect |
+| target | 1 = presence of heart disease; 0 = absence of heart disease |
 
 <p align="center">
   <img src="https://github.com/erenyeager101/ML-based-Heart-Disease-Detection/blob/main/pics/Q6_Image2_EDAI2.png" alt="Heart Disease Detection Result" width="600" />
 </p>
 
-# Usage
-Clone the repository:
-bash
+---
 
+## ⚙️ **Installation**  
+
+### **Step 1:** Clone the repository  
+```bash
 git clone https://github.com/erenyeager101/Heart-Disease-monitoring.git
-cd heart-disease-prediction
-Ensure you have all dependencies installed.
+cd Heart-Disease-monitoring
+```
 
-Run the main script:
+### **Step 2:** Create and activate a virtual environment  
+```bash
+python -m venv venv
+venv\Scripts\activate  # (Windows)
+source venv/bin/activate  # (Mac/Linux)
+```
 
-bash
+### **Step 3:** Install dependencies  
+```bash
+pip install -r requirements.txt
+```
 
-python main.py
+### **Step 4:** Run the Flask web app  
+```bash
+python app.py
+```
 
-# Models Evaluated
-The following models are evaluated in this project:
+Now, open your browser and go to **http://127.0.0.1:5000/** 🚀  
 
-Logistic Regression
-Naive Bayes
-Support Vector Machine (SVM)
-K-Nearest Neighbors (KNN)
-Decision Tree
-Random Forest
-Neural Network
-Results
+---
 
-base estimators =[ random forest , descision , knn]
-The accuracy scores of the models are as follows:
+## 💻 **Usage**  
+- Open the web app.  
+- Enter the required patient medical parameters.  
+- Click **Predict** to see if the patient is likely to have heart disease.  
+- The app displays the result instantly.  
 
-Logistic Regression: 85.25%
-Naive Bayes: 85.25%
-Support Vector Machine: 81.97%
-K-Nearest Neighbors: 67.21%
-Decision Tree: 81.97%
-Random Forest: 88.76%
-Neural Network: 85.25%
-Stacking Classifier: 90.16%
+---
+
+## 🤖 **Models Evaluated**  
+| Model | Accuracy |
+|--------|-----------|
+| Logistic Regression | 85.25% |
+| Naive Bayes | 85.25% |
+| Support Vector Machine (SVM) | 81.97% |
+| K-Nearest Neighbors (KNN) | 67.21% |
+| Decision Tree | 81.97% |
+| Random Forest | 88.76% |
+| Neural Network | 85.25% |
+| **Stacking Classifier (Hybrid Model)** | **90.16%** |
+
+> Base estimators used in Stacking Model: Random Forest, Decision Tree, and KNN.  
 
 <p align="center">
-  <img src="https://github.com/erenyeager101/ML-based-Heart-Disease-Detection/blob/main/pics/accuracy.png" alt="Accuracy" width="600" />
+  <img src="https://github.com/erenyeager101/ML-based-Heart-Disease-Detection/blob/main/pics/accuracy.png" alt="Model Accuracy Comparison" width="600" />
 </p>
 
-# Visualization
-The project includes a bar plot that compares the accuracy scores of different models.
+---
 
+## 📈 **Visualization Example**  
 
-
+```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#Example code to plot the accuracy scores
-plt.figure(figsize=(15, 8))
+algorithms = ['LR', 'NB', 'SVM', 'KNN', 'DT', 'RF', 'NN', 'Stacking']
+scores = [85.25, 85.25, 81.97, 67.21, 81.97, 88.76, 85.25, 90.16]
+
+plt.figure(figsize=(12, 6))
 sns.barplot(x=algorithms, y=scores)
 plt.xlabel("Algorithms")
-plt.ylabel("Accuracy score")
+plt.ylabel("Accuracy (%)")
+plt.title("Model Performance Comparison")
 plt.show()
-Saving and Loading Models
-The best model (Random Forest in this case, cause the accuracy we fetched using this model was highest in comparison to other algorithms )is saved using pickle for future use.
+```
 
+---
 
+## 💾 **Saving and Loading Models**  
+
+```python
 import pickle
 
 # Save the model
-with open('model_randomforestversion2.pkl', 'wb') as f:
-    pickle.dump(rf, f)
+with open('stacking_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
 
-    
-# Contributing
-Contributions are welcome! Please create a pull request or raise an issue to discuss your ideas.
+# Load the model
+with open('stacking_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+```
 
-# License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
 
+## 🤝 **Contributing**  
+Contributions are welcome!  
+- Fork the repository  
+- Create a new branch (`feature-branch`)  
+- Commit your changes  
+- Open a pull request  
 
+---
 
+## 📜 **License**  
+This project is licensed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for details.  
 
+---
 
-
-
+> Developed with ❤️ by [Kunal Sonne](https://github.com/erenyeager101)
