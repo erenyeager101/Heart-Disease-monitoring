@@ -1,193 +1,230 @@
+# heart_pipeline.py
+"""
+Optimized heart disease classification pipeline:
+- loads data
+- builds preprocessing pipelines for numeric + categorical features
+- uses RandomizedSearchCV to tune RandomForest + HistGradientBoosting
+- builds a StackingClassifier
+- evaluates using StratifiedKFold cross-validation and holdout test
+- saves final pipeline with joblib
+"""
+
 import os
-
-import pandas as pd
-from sklearn.discriminant_analysis import StandardScaler
-
-# %matplotlib inline
-
-print(os.listdir())
-
 import warnings
+from typing import Tuple, List
 
-warnings.filterwarnings('ignore')
-dataset = pd.read_csv("heart.csv")
-
-info = ["age", "1: male, 0: female", "chest pain type, 1: typical angina, 2: atypical angina, 3: non-anginal pain, "
-                                     "4: asymptomatic", "resting blood pressure", " serum cholestoral in mg/dl",
-        "fasting blood sugar > 120 mg/dl", "resting electrocardiographic results (values 0,1,2)", " maximum heart rate "
-                                                                                                  "achieved",
-        "exercise induced angina", "oldpeak = ST depression induced by exercise relative to rest", "the slope of the "
-                                                                                                   "peak exercise ST "
-                                                                                                   "segment",
-        "number of major vessels (0-3) colored by flourosopy", "thal: 3 = normal; 6 = fixed defect; 7 = reversable "
-                                                               "defect"]
-
-for i in range(len(info)):
-    print(dataset.columns[i] + ":\t\t\t" + info[i])
-    print()
-
-    from sklearn.model_selection import train_test_split
-
-    predictors = dataset.drop("target", axis=1)
-    target = dataset["target"]
-
-    X_train, X_test, Y_train, Y_test = train_test_split(predictors, target, test_size=0.20, random_state=0)
-    print("Training set size:", X_train.shape[0])
-    print("Testing set size:", X_test.shape[0])
-    pd.set_option('display.max_columns', None)
-    print("Contents of rows used in the testing set:")
-    print(X_test)
-
-    
-
-    from sklearn.model_selection import cross_val_score
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.datasets import load_digits
-
-    digits = load_digits()
-    X, y = digits.data, digits.target
-
-    rf = RandomForestClassifier(random_state=42)
-
-    cv_scores = cross_val_score(rf, X, y, cv=5)
-
-    print("Average Accuracy:", cv_scores.mean())
-
-from sklearn.metrics import accuracy_score
-
+import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import RandomForestClassifier, StackingClassifier, HistGradientBoostingClassifier
+from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression, RidgeClassifier
+from sklearn.metrics import (accuracy_score, classification_report, confusion_matrix,
+                             ConfusionMatrixDisplay)
+from sklearn.model_selection import (RandomizedSearchCV, StratifiedKFold, train_test_split,
+                                     cross_val_score)
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-lr = LogisticRegression()
+# ---- Config / reproducibility ----
+RANDOM_STATE = 42
+N_JOBS = -1
+CV = 5
+RANDOM_SEARCH_ITERS = 40  # smaller for speed, increase if you have time
 
-lr.fit(X_train, Y_train)
-
-Y_pred_lr = lr.predict(X_test)
-score_lr = round(accuracy_score(Y_pred_lr, Y_test) * 100, 2)
-
-print("The accuracy score achieved using Logistic Regression is: " + str(score_lr) + " %")
-
-from sklearn.naive_bayes import GaussianNB
-
-nb = GaussianNB()
-
-nb.fit(X_train, Y_train)
-
-Y_pred_nb = nb.predict(X_test)
-score_nb = round(accuracy_score(Y_pred_nb, Y_test) * 100, 2)
-
-print("The accuracy score achieved using Naive Bayes is: " + str(score_nb) + " %")
-
-from sklearn import svm
-
-sv = svm.SVC(kernel='linear')
-
-sv.fit(X_train, Y_train)
-
-Y_pred_svm = sv.predict(X_test)
-score_svm = round(accuracy_score(Y_pred_svm, Y_test) * 100, 2)
-
-print("The accuracy score achieved using Linear SVM is: " + str(score_svm) + " %")
-
-from sklearn.neighbors import KNeighborsClassifier
-
-knn = KNeighborsClassifier(n_neighbors=7)
-knn.fit(X_train, Y_train)
-Y_pred_knn = knn.predict(X_test)
-score_knn = round(accuracy_score(Y_pred_knn, Y_test) * 100, 2)
-
-print("The accuracy score achieved using KNN is: " + str(score_knn) + " %")
-
-from sklearn.tree import DecisionTreeClassifier
-
-max_accuracy = 0
-
-for x in range(200):
-    dt = DecisionTreeClassifier(random_state=x)
-    dt.fit(X_train, Y_train)
-    Y_pred_dt = dt.predict(X_test)
-    current_accuracy = round(accuracy_score(Y_pred_dt, Y_test) * 100, 2)
-    if current_accuracy > max_accuracy:
-        max_accuracy = current_accuracy
-        best_x = x
-
-# print(max_accuracy)
-# print(best_x)
+warnings.filterwarnings("ignore")
 
 
-dt = DecisionTreeClassifier(random_state=best_x)
-dt.fit(X_train, Y_train)
-Y_pred_dt = dt.predict(X_test)
-score_dt = round(accuracy_score(Y_pred_dt, Y_test) * 100, 2)
+def load_data(path: str = "heart.csv") -> pd.DataFrame:
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{path} not found")
+    df = pd.read_csv(path)
+    return df
 
-print("The accuracy score achieved using Decision Tree is: " + str(score_dt) + " %")
 
-from sklearn.ensemble import RandomForestClassifier, StackingClassifier
+def inspect_dataset(df: pd.DataFrame) -> None:
+    print("Shape:", df.shape)
+    print("Columns:", list(df.columns))
+    print("\nMissing values per column:\n", df.isna().sum())
+    print("\nValue counts for possible categorical columns (first few):")
+    for col in df.columns:
+        if df[col].nunique() <= 10:
+            print(f"  {col}: {df[col].unique()[:10]} (unique={df[col].nunique()})")
 
-max_accuracy = 0
 
-for x in range(2000):
-    rf = RandomForestClassifier(random_state=x)
-    rf.fit(X_train, Y_train)
-    Y_pred_rf = rf.predict(X_test)
-    current_accuracy = round(accuracy_score(Y_pred_rf, Y_test) * 100, 2)
-    if (current_accuracy > max_accuracy):
-        max_accuracy = current_accuracy
-        best_x = x
+def infer_feature_types(df: pd.DataFrame) -> Tuple[List[str], List[str]]:
+    """
+    Try to infer numeric vs categorical features.
+    We'll treat low-cardinality integer columns as categorical (<=10 unique values)
+    and floats/high-cardinality ints as numeric.
+    """
+    excluded = {"target"}
+    numeric_cols = []
+    categorical_cols = []
+    for col in df.columns:
+        if col in excluded:
+            continue
+        if pd.api.types.is_float_dtype(df[col]):
+            numeric_cols.append(col)
+        elif pd.api.types.is_integer_dtype(df[col]):
+            if df[col].nunique() <= 10:
+                categorical_cols.append(col)
+            else:
+                numeric_cols.append(col)
+        else:
+            categorical_cols.append(col)
+    return numeric_cols, categorical_cols
 
-# print(max_accuracy)
-# print(best_x)
 
-rf = RandomForestClassifier(random_state=42)
-rf.fit(X_train, Y_train)
-Y_pred_rf = rf.predict(X_test)
-score_rf = round(accuracy_score(Y_pred_rf, Y_test) * 100, 2)
+def build_preprocessor(numeric_features: List[str], categorical_features: List[str]) -> ColumnTransformer:
+    numeric_transformer = Pipeline(steps=[
+        ("imputer", SimpleImputer(strategy="median")),
+        ("scaler", StandardScaler())
+    ])
 
-print("The accuracy score achieved using Random Forest is: " + str(score_rf) + " %")
+    categorical_transformer = Pipeline(steps=[
+        ("imputer", SimpleImputer(strategy="most_frequent")),
+        ("onehot", OneHotEncoder(handle_unknown="ignore", sparse=False))
+    ])
 
-estimators = [
-    ('rf', RandomForestClassifier(random_state=best_x)),
-    ('knn', KNeighborsClassifier(n_neighbors=7)),  
-    ('dt', DecisionTreeClassifier(random_state=best_x))  
-]
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+    preprocessor = ColumnTransformer(transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ])
 
-stacking_clf = StackingClassifier(estimators=estimators, final_estimator=RidgeClassifier(), cv=5)
-stacking_clf.fit(X_train_scaled, Y_train)
-Y_pred_stacking = stacking_clf.predict(X_test_scaled)
-score_stacking = round(accuracy_score(Y_pred_stacking, Y_test) * 100, 2)
-print("The accuracy score achieved using Improved Stacking Classifier is: " + str(score_stacking) + " %")
+    return preprocessor
 
-scores = [score_lr, score_nb, score_svm, score_knn, score_dt, score_rf]
-algorithms = ["Logistic Regression", "Naive Bayes", "Support Vector Machine", "K-Nearest Neighbors", "Decision Tree",
-              "Random Forest"]
 
-for i in range(len(algorithms)):
-    print("The accuracy score achieved using " + algorithms[i] + " is: " + str(scores[i]) + " %")
-    import matplotlib.pyplot as plt
+def random_search_for_model(pipeline: Pipeline, param_distributions: dict, X, y, iters=20):
+    rs = RandomizedSearchCV(
+        pipeline,
+        param_distributions,
+        n_iter=iters,
+        scoring="accuracy",
+        cv=StratifiedKFold(n_splits=CV, shuffle=True, random_state=RANDOM_STATE),
+        random_state=RANDOM_STATE,
+        n_jobs=N_JOBS,
+        verbose=1
+    )
+    rs.fit(X, y)
+    print(f"Best score: {rs.best_score_:.4f}; Best params: {rs.best_params_}")
+    return rs.best_estimator_
 
-    plt.figure(figsize=(15, 8))
 
-    plt.xlabel("Algorithms")
-    plt.ylabel("Accuracy score")
+def evaluate_final(pipeline: Pipeline, X_test, y_test) -> None:
+    y_pred = pipeline.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+    print(f"Test accuracy: {acc:.4f}")
+    print("\nClassification report:")
+    print(classification_report(y_test, y_pred, digits=4))
 
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-
-    sns.barplot(x=algorithms, y=scores)
-    plt.xlabel("Algorithms")
-    plt.ylabel("Accuracy score")
+    cm = confusion_matrix(y_test, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+    disp.plot()
+    plt.title("Confusion Matrix")
     plt.show()
 
-  # saving the predition model in pickle file format
 
-    import pickle
-with open('stacking_model.pkl', 'wb') as f:
-    pickle.dump(stacking_clf, f) 
+def main():
+    df = load_data("heart.csv")
+    inspect_dataset(df)
 
-# Example prediction after saving
-prediction = stacking_clf.predict([[55, 0, 1, 132, 342, 0, 1, 166, 0, 1.2, 2, 0, 2]])
-print("Prediction:", prediction)
+    if "target" not in df.columns:
+        raise KeyError("The dataset must contain a 'target' column.")
+
+    numeric_features, categorical_features = infer_feature_types(df)
+    print("\nNumeric features:", numeric_features)
+    print("Categorical features:", categorical_features)
+
+    X = df.drop("target", axis=1)
+    y = df["target"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.20, stratify=y, random_state=RANDOM_STATE
+    )
+
+    preprocessor = build_preprocessor(numeric_features, categorical_features)
+
+    # ---- Candidate models pipelines for RandomizedSearch ----
+    # Random Forest pipeline
+    rf_pipeline = Pipeline([
+        ("preproc", preprocessor),
+        ("clf", RandomForestClassifier(random_state=RANDOM_STATE, n_jobs=1))   # n_jobs set globally in RandomizedSearchCV
+    ])
+
+    rf_param_dist = {
+        "clf__n_estimators": [100, 200, 400, 800],
+        "clf__max_depth": [None, 6, 8, 12],
+        "clf__min_samples_split": [2, 4, 8],
+        "clf__min_samples_leaf": [1, 2, 4],
+        "clf__bootstrap": [True, False],
+        "clf__class_weight": [None, "balanced"]
+    }
+
+    # HistGradientBoosting pipeline (fast and often very good)
+    hgb_pipeline = Pipeline([
+        ("preproc", preprocessor),
+        ("clf", HistGradientBoostingClassifier(random_state=RANDOM_STATE))
+    ])
+
+    hgb_param_dist = {
+        "clf__max_iter": [100, 200, 400],
+        "clf__max_leaf_nodes": [15, 31, 63, None],
+        "clf__learning_rate": [0.01, 0.05, 0.1, 0.2],
+        "clf__l2_regularization": [0.0, 0.1, 0.5]
+    }
+
+    # Run randomized search (speed / performance balance)
+    print("\nTuning RandomForest (RandomizedSearchCV)...")
+    best_rf = random_search_for_model(rf_pipeline, rf_param_dist, X_train, y_train, iters=min(RANDOM_SEARCH_ITERS, 40))
+
+    print("\nTuning HistGradientBoosting (RandomizedSearchCV)...")
+    best_hgb = random_search_for_model(hgb_pipeline, hgb_param_dist, X_train, y_train, iters=min(RANDOM_SEARCH_ITERS, 24))
+
+    # ---- Build stacking classifier using the tuned estimators ----
+    estimators = [
+        ("rf", best_rf.named_steps["clf"]),
+        ("hgb", best_hgb.named_steps["clf"])
+    ]
+
+    # We need a pipeline that contains preprocessing and the stacking classifier
+    stacking_pipeline = Pipeline([
+        ("preproc", preprocessor),
+        ("stack", StackingClassifier(
+            estimators=estimators,
+            final_estimator=LogisticRegression(max_iter=2000),
+            n_jobs=N_JOBS,
+            passthrough=False
+        ))
+    ])
+
+    print("\nEvaluating stacking pipeline with cross-validation...")
+    skf = StratifiedKFold(n_splits=CV, shuffle=True, random_state=RANDOM_STATE)
+    cv_scores = cross_val_score(stacking_pipeline, X_train, y_train, cv=skf, scoring="accuracy", n_jobs=N_JOBS)
+    print(f"Cross-validated accuracy (stacking): mean={cv_scores.mean():.4f}, std={cv_scores.std():.4f}")
+
+    # Fit on full training set and evaluate on test set
+    stacking_pipeline.fit(X_train, y_train)
+    evaluate_final(stacking_pipeline, X_test, y_test)
+
+    # Save the final pipeline
+    model_path = "heart_stacking_pipeline.joblib"
+    joblib.dump(stacking_pipeline, model_path)
+    print(f"\nSaved final pipeline to {model_path}")
+
+    # Example prediction (replace values with your feature order)
+    sample = X_test.iloc[0:1]
+    print("\nSample input (first test row):")
+    print(sample)
+    print("Predicted class:", stacking_pipeline.predict(sample))
+    if hasattr(stacking_pipeline, "predict_proba"):
+        try:
+            print("Predicted probabilities:", stacking_pipeline.predict_proba(sample))
+        except Exception:
+            pass
 
 
+if __name__ == "__main__":
+    main()
